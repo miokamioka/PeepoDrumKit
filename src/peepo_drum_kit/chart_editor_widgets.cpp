@@ -1210,7 +1210,7 @@ namespace PeepoDrumKit
 					GenericMemberFlags outModifiedMembers = GenericMemberFlags_None;
 					for (const GenericMember member : { GenericMember::NoteType_V, GenericMember::I16_BalloonPopCount, GenericMember::Time_Offset,
 						GenericMember::Tempo_V, GenericMember::TimeSignature_V, GenericMember::F32_ScrollSpeed, GenericMember::B8_BarLineVisible,
-						GenericMember::I8_ScrollType, GenericMember::F32_JPOSScroll, GenericMember::F32_JPOSScrollDuration})
+						GenericMember::I8_ScrollType})
 					{
 						if (!(commonAvailableMemberFlags & EnumToFlag(member)))
 							continue;
@@ -1281,6 +1281,7 @@ namespace PeepoDrumKit
 								valueWasChanged = true;
 							}
 						} break;
+						/*
 						case GenericMember::F32_JPOSScroll:
 						{
 							b8 areAllJPOSScrollMovesTheSame = (commonEqualMemberFlags & EnumToFlag(member));
@@ -1401,6 +1402,7 @@ namespace PeepoDrumKit
 								}
 							}
 						} break;
+						*/
 						case GenericMember::F32_ScrollSpeed:
 						{
 							b8 areAllScrollSpeedsTheSame = (commonEqualMemberFlags & EnumToFlag(member));

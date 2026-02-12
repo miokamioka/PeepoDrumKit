@@ -687,7 +687,7 @@ namespace PeepoDrumKit
 
 			// NOTE: Hit indicator circle
 			drawList->ChannelsSetCurrent(1);
-			const vec2 hitCirclePosJPos = Camera.GetHitCircleCoordinatesJPOSScroll(jposScrollChanges, cursorTimeOrAnimated, tempoChanges);
+			const vec2 hitCirclePosJPos = vec2(0, 0); // Camera.GetHitCircleCoordinatesJPOSScroll(jposScrollChanges, cursorTimeOrAnimated, tempoChanges);
 			const vec2 hitCirclePosLane = Camera.JPOSScrollToLaneSpace(hitCirclePosJPos);
 			const vec2 hitCirclePos = Camera.LaneToScreenSpace(hitCirclePosLane);
 			if (gogoFireZoomAmount > 0) {
@@ -706,9 +706,11 @@ namespace PeepoDrumKit
 				Camera.WorldToScreenScale(GameHitCircle.OuterOutlineRadius), isGogo ? GameLaneHitCircleOuterOutlineColorGogo : GameLaneHitCircleOuterOutlineColor, 0, Camera.WorldToScreenScale(GameHitCircle.OuterOutlineThickness));
 
 			if (hitCirclePosJPos != vec2{ 0, 0 }) {
+				/*
 				std::string str = Complex(hitCirclePosJPos.x, hitCirclePosJPos.y).toStringCompat();
 				vec2 posTxtJPos = hitCirclePos + vec2{ -1, -1 } * Camera.WorldToScreenScale(GameHitCircle.OuterOutlineRadius);
 				drawList->AddText(posTxtJPos, 0xFFFFFFFF, str.c_str(), str.c_str() + str.length());
+				*/
 			}
 
 			drawList->ChannelsSetCurrent(2);

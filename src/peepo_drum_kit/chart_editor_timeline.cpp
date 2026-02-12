@@ -248,6 +248,9 @@ namespace PeepoDrumKit
 		f32 localY = 0.0f;
 		for (TimelineRowType rowType = {}; rowType < TimelineRowType::Count; IncrementEnum(rowType))
 		{
+			if (rowType == TimelineRowType::JPOSScroll)
+				continue;
+
 			// HACK: Draw the non default branches smaller for now to waste less space (might wanna rethink all of this...)
 			const b8 isNotesRow =
 				(rowType >= TimelineRowType::NoteBranches_First && rowType <= TimelineRowType::NoteBranches_Last) &&
