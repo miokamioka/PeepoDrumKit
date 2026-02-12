@@ -243,6 +243,7 @@ namespace PeepoDrumKit
 		f32 ClickAnimationTimeDuration;
 		// NOTE: Temp inline storage for rendering
 		mutable NoteSEType TempSEType;
+		mutable i16 TempComboCount;
 
 		constexpr Beat GetStart() const { return BeatTime; }
 		constexpr Beat GetEnd() const { return BeatTime + BeatDuration; }
@@ -405,6 +406,14 @@ namespace PeepoDrumKit
 		}
 
 		void RecalculateSENotes(BranchType branch) const; // implemented in chart_editor_widgets_game.cpp
+
+		void RecalculateComboCounts() const
+		{
+			for (BranchType branch = BranchType::Normal; branch < BranchType::Count; IncrementEnum(branch))
+				RecalculateComboCounts(branch);
+		}
+
+		void RecalculateComboCounts(BranchType branch) const; // implemented in chart_editor_widgets_game.cpp
 	};
 
 	// NOTE: Internal representation of a chart. Can then be imported / exported as .tja (and maybe as the native fumen binary format too eventually?)

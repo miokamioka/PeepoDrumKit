@@ -6,6 +6,7 @@
 #include "chart_editor_context.h"
 #include "chart_editor_theme.h"
 #include "imgui/imgui_include.h"
+#include "imgui/backend/imgui_custom_draw.h"
 
 namespace PeepoDrumKit
 {
@@ -259,6 +260,10 @@ namespace PeepoDrumKit
 
 		struct DeferredNoteDrawData { f32 LaneHeadX, LaneTailX, LaneHeadY, LaneTailY; Tempo Tempo; Complex ScrollSpeed; const Note* OriginalNote; Time NoteStartTime, NoteEndTime; };
 		std::vector<DeferredNoteDrawData> ReverseNoteDrawBuffer;
+
+		// NOTE: Combo font texture loaded from Combo.png
+		CustomDraw::GPUTexture ComboFontTexture = {};
+		b8 ComboFontLoaded = false;
 
 		void DrawGui(ChartContext& context, Time animatedCursorTime);
 	};
