@@ -491,6 +491,23 @@ namespace PeepoDrumKit
 				Gui::PopFont();
 				Gui::PopStyleColor();
 
+				// v.Kam1oEdit
+				{
+					Gui::PushStyleColor(ImGuiCol_Text, colors.RedBright);
+					Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Medium));
+					Gui::TextUnformatted("Kam1oEdit v.1.0");
+					Gui::PopFont();
+
+					Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Small));
+					Gui::TextUnformatted(u8"- TJAファイルの1行目のコメントアウトを無効化");
+					Gui::TextUnformatted(u8"- i18n日本語文章を一部最適化");
+					Gui::TextUnformatted(u8"- AllowerGridBarDivisions(up,downキーを押したときの譜面区切り)における\n5,6,7,9,10,14,18,20,28,36,40分音符区切りを削除");
+					Gui::TextUnformatted(u8"- JPOSSCROLL設定を削除");
+					Gui::TextUnformatted("");
+					Gui::PopFont();
+					Gui::PopStyleColor();
+				}
+
 				// v1.2
 				{
 					Gui::PushStyleColor(ImGuiCol_Text, colors.RedBright);
@@ -751,13 +768,13 @@ namespace PeepoDrumKit
 			{
 				Gui::PushStyleColor(ImGuiCol_Text, colors.GreenDark);
 				Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Large));
-				Gui::TextUnformatted("Welcome to Peepo Drum Kit (Unofficial fork)");
+				Gui::TextUnformatted("Welcome to Peepo Drum Kit (Kam1o fork Edition)!");
 				Gui::PopFont();
 				Gui::PopStyleColor();
 
 				Gui::PushStyleColor(ImGuiCol_Text, colors.GreenBright);
 				Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Medium));
-				Gui::TextWrapped("Things are still very much WIP and subject to change with some features still missing " UTF8_FeelsOkayMan);
+				Gui::TextWrapped(u8"私用開発につき、一部要素が大幅に変更・削除される場合があります。");
 				Gui::Separator();
 				Gui::TextUnformatted("");
 				Gui::PopFont();
@@ -767,7 +784,7 @@ namespace PeepoDrumKit
 			{
 				Gui::PushStyleColor(ImGuiCol_Text, colors.RedDark);
 				Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Medium));
-				Gui::TextUnformatted("Basic Controls:");
+				Gui::TextUnformatted(u8"使い方");
 				Gui::PopFont();
 				Gui::PopStyleColor();
 
@@ -835,10 +852,11 @@ namespace PeepoDrumKit
 
 				Gui::PushStyleColor(ImGuiCol_Text, colors.WhiteBright);
 				Gui::TextWrapped(
-					"NOTE: This is an altered, unofficial version of Peepo Drum Kit aimed to support wider gimmicks and to be a best fit with OpenTaiko.\n"
-					"Some main components are altered, like the 1/192nd grid being extended to be able to support odd tuplets (Quintuplets, Septuplets, Nonuplets.)\n"
-					"The following description is from the official version of Peepo Drum Kit.\n"
-					"\n"
+					u8"NOTE: これはPeepo Drum Kit(0auBSQ fork ver.)の改変版であり、非公式のものです。OpTk用に最適化されたギミック要素を独断と偏見で一部削除し、多くの日本人譜面製作者がわかりやすいように作られています。\n"
+					"例を挙げると...1/192拍のグリッドを拡張して5連符、7連符、9連符などの奇数連符を追加していたと思いますが、多くの譜面製作者は使わないと思い削除しています。詳しくはUpdate Notes参照。\n"
+					"以下Peepo Drum Kit(本家版)の説明\n"
+					"\n");
+				Gui::TextWrapped(
 					"Peepo Drum Kit is not really a TJA editor in the same sense that a text editor is one.\n"
 					"It's a Taiko chart editor that transparently converts to and from the TJA format,"
 					" however its internal data representation of a chart differs significantly.\n"
