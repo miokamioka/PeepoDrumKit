@@ -2567,6 +2567,7 @@ namespace PeepoDrumKit
 						Gui::PopID();
 				});
 
+				/*
 				const JPOSScrollChange* JPOSScrollChangeAtCursor = course.JPOSScrollChanges.TryFindLastAtBeat(cursorBeat);
 				const Complex JPOSScrollMoveAtCursor = (JPOSScrollChangeAtCursor != nullptr) ? JPOSScrollChangeAtCursor->Move : FallbackEvent<JPOSScrollChange>.Move;
 				const f32 JPOSScrollDurationAtCursor = (JPOSScrollChangeAtCursor != nullptr) ? JPOSScrollChangeAtCursor->Duration : FallbackEvent<JPOSScrollChange>.Duration;
@@ -2641,6 +2642,7 @@ namespace PeepoDrumKit
 
 						Gui::PopID();
 					});
+				*/
 
 
 				Gui::Property::PropertyTextValueFunc(UI_Str("EVENT_GO_GO_TIME"), [&]
