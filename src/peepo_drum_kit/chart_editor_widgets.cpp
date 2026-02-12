@@ -491,7 +491,23 @@ namespace PeepoDrumKit
 				Gui::PopFont();
 				Gui::PopStyleColor();
 
-				// v.Kam1oEdit
+				// v.1.1 Kam1oEdit
+				{
+					Gui::PushStyleColor(ImGuiCol_Text, colors.RedBright);
+					Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Medium));
+					Gui::TextUnformatted("Kam1oEdit v.1.1");
+					Gui::PopFont();
+
+					Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Small));
+					Gui::TextUnformatted(u8"- audio命名規則の変更");
+					Gui::TextUnformatted(u8"- コンボ数の表示");
+					Gui::TextUnformatted(u8"- 譜面プロパティの翻訳系などの欄の削除");
+					Gui::TextUnformatted("");
+					Gui::PopFont();
+					Gui::PopStyleColor();
+				}
+
+				// v.1.0 Kam1oEdit
 				{
 					Gui::PushStyleColor(ImGuiCol_Text, colors.RedBright);
 					Gui::PushFont(FontMain, GuiScaleI32_AtTarget(FontBaseSizes::Medium));
@@ -2019,16 +2035,12 @@ namespace PeepoDrumKit
 					if (Gui::InputTextWithHint("##ChartTitle", "n/a", &chart.ChartTitle))
 						context.Undo.NotifyChangesWereMade();
 				});
-				static std::string newTitleLocale = "";
-				LocalizedPropertyCollapsingHeader(context, UI_Str("DETAILS_CHART_PROP_TITLE_LOCALIZED"), chart.ChartTitleLocalized, &newTitleLocale);
 				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_SUBTITLE"), [&]
 				{
 					Gui::SetNextItemWidth(-1.0f);
 					if (Gui::InputTextWithHint("##ChartSubtitle", "n/a", &chart.ChartSubtitle))
 						context.Undo.NotifyChangesWereMade();
 				});
-				static std::string newSubtitleLocale = "";
-				LocalizedPropertyCollapsingHeader(context, UI_Str("DETAILS_CHART_PROP_SUBTITLE_LOCALIZED"), chart.ChartSubtitleLocalized, &newSubtitleLocale);
 				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_CREATOR"), [&]
 				{
 					Gui::SetNextItemWidth(-1.0f);
@@ -2056,6 +2068,71 @@ namespace PeepoDrumKit
 						out.BrowseOpenSong = true;
 					}
 				});
+
+				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_SONG_VOLUME"), [&]
+				{
+					Gui::SetNextItemWidth(-1.0f);
+					if (f32 v = ToPercent(chart.SongVolume); Gui::SliderFloat("##SongVolume", &v, ToPercent(MinVolume), ToPercent(MaxVolumeSoftLimit), "%.0f%%"))
+					{
+					chart.SongVolume = Clamp(FromPercent(v), MinVolume, MaxVolumeHardLimit);
+						context.Undo.NotifyChangesWereMade();
+					}
+				});
+				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_SOUND_EFFECT_VOLUME"), [&]
+				{
+					Gui::SetNextItemWidth(-1.0f);
+					if (f32 v = ToPercent(chart.SoundEffectVolume); Gui::SliderFloat("##SoundEffectVolume", &v, ToPercent(MinVolume), ToPercent(MaxVolumeSoftLimit), "%.0f%%"))
+					{
+						chart.SoundEffectVolume = Clamp(FromPercent(v), MinVolume, MaxVolumeHardLimit);
+						context.Undo.NotifyChangesWereMade();
+					}
+				});
+
+				// static std::string newTitleLocale = "";
+				// LocalizedPropertyCollapsingHeader(context, UI_Str("DETAILS_CHART_PROP_TITLE_LOCALIZED"), chart.ChartTitleLocalized, &newTitleLocale);
+
+				/*
+				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_SUBTITLE"), [&]
+				{
+					Gui::SetNextItemWidth(-1.0f);
+					if (Gui::InputTextWithHint("##ChartSubtitle", "n/a", &chart.ChartSubtitle))
+						context.Undo.NotifyChangesWereMade();
+				});
+				*/
+				// static std::string newSubtitleLocale = "";
+				// LocalizedPropertyCollapsingHeader(context, UI_Str("DETAILS_CHART_PROP_SUBTITLE_LOCALIZED"), chart.ChartSubtitleLocalized, &newSubtitleLocale);
+				/*
+				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_CREATOR"), [&]
+				{
+					Gui::SetNextItemWidth(-1.0f);
+					if (Gui::InputTextWithHint("##ChartCreator", "n/a", &chart.ChartCreator))
+						context.Undo.NotifyChangesWereMade();
+				});
+				*/
+
+				/*
+				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_SONG_FILE_NAME"), [&]
+				{
+					const b8 songIsLoading = in.IsSongAsyncLoading;
+					cstr loadingText = SongLoadingTextAnimation.UpdateFrameAndGetText(songIsLoading, Gui::DeltaTime());
+					SongFileNameInputBuffer = songIsLoading ? "" : chart.SongFileName;
+
+					Gui::BeginDisabled(songIsLoading);
+					const auto result = Gui::PathInputTextWithHintAndBrowserDialogButton("##SongFileName", "...##SongFileName",
+						songIsLoading ? loadingText : "song.ogg", &SongFileNameInputBuffer, songIsLoading ? ImGuiInputTextFlags_ReadOnly : ImGuiInputTextFlags_EnterReturnsTrue);
+					Gui::EndDisabled();
+
+					if (result.InputTextEdited)
+					{
+						out.LoadNewSong = true;
+						out.NewSongFilePath = SongFileNameInputBuffer;
+					}
+					else if (result.BrowseButtonClicked)
+					{
+						out.BrowseOpenSong = true;
+					}
+				});
+				*/
 				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_JACKET_FILE_NAME"), [&]
 					{
 						
@@ -2078,6 +2155,7 @@ namespace PeepoDrumKit
 							out.BrowseOpenJacket = true;
 						}
 					});
+				/*
 				Gui::Property::PropertyTextValueFunc(UI_Str("CHART_PROP_SONG_VOLUME"), [&]
 				{
 					Gui::SetNextItemWidth(-1.0f);
@@ -2096,8 +2174,9 @@ namespace PeepoDrumKit
 						context.Undo.NotifyChangesWereMade();
 					}
 				});
-				static std::string newChartMetadataKey = "";
-				OtherMetadataCollapsingHeader(context, UI_Str("DETAILS_CHART_PROP_OTHER_METADATA"), chart.OtherMetadata, &newChartMetadataKey);
+				*/
+				// static std::string newChartMetadataKey = "";
+				// OtherMetadataCollapsingHeader(context, UI_Str("DETAILS_CHART_PROP_OTHER_METADATA"), chart.OtherMetadata, &newChartMetadataKey);
 				Gui::Property::EndTable();
 			}
 		}
@@ -2122,12 +2201,14 @@ namespace PeepoDrumKit
 					if (GuiDifficultyLevelStarSliderWidget("##DifficultyLevel", &course.Level, DifficultySliderStarsFitOnScreenLastFrame, DifficultySliderStarsWasHoveredLastFrame))
 						context.Undo.NotifyChangesWereMade();
 				});
+				/* 難易度の小数
 				Gui::Property::PropertyTextValueFunc(UI_Str("COURSE_PROP_DIFFICULTY_LEVEL_DECIMAL"), [&]
 					{
 						Gui::SetNextItemWidth(-1.0f);
 						if (GuiDifficultyDecimalLevelStarSliderWidget("##DifficultyLevelDecimal", &course.Decimal, DifficultySliderStarsFitOnScreenLastFrame, DifficultySliderStarsWasHoveredLastFrame))
 							context.Undo.NotifyChangesWereMade();
 				});
+				*/
 				Gui::Property::PropertyTextValueFunc(UI_Str("COURSE_PROP_PLAYER_SIDE_COUNT"), [&]
 				{
 					Gui::SetNextItemWidth(-1.0f);
