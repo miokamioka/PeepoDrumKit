@@ -16,8 +16,8 @@ namespace PeepoDrumKit
 
 	static constexpr cstr SoundEffectTypeFilePaths[] =
 	{
-		u8"assets/audio/taiko_don_16bit_44100.wav",
-		u8"assets/audio/taiko_ka_16bit_44100.wav",
+		u8"assets/audio/don.ogg",
+		u8"assets/audio/ka.ogg",
 		u8"assets/audio/metronome_bar_16bit_44100.wav",
 		u8"assets/audio/metronome_beat_16bit_44100.wav",
 	};
