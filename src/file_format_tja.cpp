@@ -6,7 +6,7 @@
 namespace TJA
 {
 	// NOTE: Comment marker stored in the format: "// PeepoDrumKit yyyy/MM/dd"
-	static constexpr std::string_view PeepoDrumKitCommentMarkerPrefix = "PeepoDrumKit";
+	static constexpr std::string_view PeepoDrumKitCommentMarkerPrefix = "ここでヘッダー部分を変えれる";
 
 	static constexpr std::string_view KeyStrings[] =
 	{
@@ -1129,9 +1129,10 @@ namespace TJA
 			}
 		};
 
-
+		// ヘッダー部分の云々かんぬん
 		if (inContent.HasPeepoDrumKitComment)
 		{
+			/*
 			out += "// ";
 			out += PeepoDrumKitCommentMarkerPrefix;
 			if (inContent.PeepoDrumKitCommentDate != Date::Zero())
@@ -1140,6 +1141,7 @@ namespace TJA
 				out += inContent.PeepoDrumKitCommentDate.ToString().Data;
 			}
 			out += '\n';
+			*/
 		}
 
 		DifficultyType currentCourseScope = DifficultyType::Count; // default course scope
