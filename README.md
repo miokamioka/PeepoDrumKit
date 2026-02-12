@@ -1,2 +1,3 @@
 # Peepo Drum Kit
-Unofficial fork of PeepoDrumKit, adding TJAPlayer3 and OpenTaiko gimmicks and features
+
+DTXManiaをいじってtja再生プログラムにしちゃったTJAPlayer2fPCをForkしてグリーン風に改造したアレをForkしてsamyuu氏が作成したtjaエディターをForkして0auBSQ氏がOpTk用に最適化したアレをForkして独断と偏見でいらない機能を色々消しちゃったアレ。
